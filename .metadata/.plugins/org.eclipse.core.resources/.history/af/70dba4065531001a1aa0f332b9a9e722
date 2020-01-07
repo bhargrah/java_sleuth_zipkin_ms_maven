@@ -1,0 +1,22 @@
+package com.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class BookingController {
+	
+	@RequestMapping(method = RequestMethod.GET,value = "/booking/newBooking")
+	public String newBooking() {
+		return "sample booking done";
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/booking/displaybooking")
+	public String displayBooking() {
+		return "Booking done for ID-576";
+
+	}
+
+}

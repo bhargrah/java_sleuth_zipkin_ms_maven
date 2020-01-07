@@ -1,0 +1,13 @@
+package com.service;
+
+public class BookingService {
+	
+	public String initiateBooking() {
+		
+		
+		
+		return null;
+		
+	}
+
+}

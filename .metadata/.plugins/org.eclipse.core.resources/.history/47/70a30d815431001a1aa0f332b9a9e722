@@ -1,0 +1,8 @@
+server.port=8251
+
+debug=true
+
+spring.sleuth.enabled=true
+spring.sleuth.sampler.probability=1.0
+
+spring.zipkin.base-url=http://localhost:9092/zipkin/

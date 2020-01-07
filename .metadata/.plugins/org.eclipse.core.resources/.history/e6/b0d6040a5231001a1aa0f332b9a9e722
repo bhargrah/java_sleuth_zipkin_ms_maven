@@ -1,0 +1,6 @@
+server.port=8251
+
+debug=true
+
+spring.sleuth.enabled=true
+spring.sleuth.sampler.rate=1.0

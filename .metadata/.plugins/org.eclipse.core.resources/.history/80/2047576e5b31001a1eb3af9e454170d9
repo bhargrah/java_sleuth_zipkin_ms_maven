@@ -1,0 +1,12 @@
+package com.service;
+
+@Bean
+public class BookingService {
+	
+	public String initiateBooking() {	
+		
+		return null;
+		
+	}
+
+}

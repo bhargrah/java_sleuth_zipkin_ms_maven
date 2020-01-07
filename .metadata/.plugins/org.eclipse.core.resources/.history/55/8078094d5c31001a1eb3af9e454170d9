@@ -1,0 +1,20 @@
+package com.service;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
+
+@Service
+public class BookingService {
+	
+	@Bean
+    public BookingService bookingService() {
+        return new BookingService();
+    }
+	
+	public String initiateBooking() {	
+		
+		return null;
+		
+	}
+
+}
