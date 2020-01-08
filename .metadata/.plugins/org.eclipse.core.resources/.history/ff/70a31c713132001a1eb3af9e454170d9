@@ -1,4 +1,5 @@
 spring.application.name=booking_service
+
 server.port=9351
 
 logging.level.org.springframework=DEBUG
