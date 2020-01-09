@@ -35,7 +35,7 @@ public class BookingController {
 		ResponseEntity<String> fundingStatus = restTemplate.getForEntity("http://localhost:9352/treasury/checkfunds",String.class);
 		status = status + "-" +fundingStatus.getBody().toString();
 		
-		if("Funded".equalsIgnoreCase(fundingStatus.getBody().toString())) {	
+		if((fundingStatus.getBody().toString()).startsWith("funded")) {	
 			// route this request to deal documentation service 
 			ResponseEntity<String> dosServiceStatus = restTemplate.getForEntity("http://localhost:9354/documentservice/upload",String.class);
 			status = status + "-" + dosServiceStatus.getBody().toString();
