@@ -1,15 +1,47 @@
 package com.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.service.BookingService;
 
 @RestController
 public class BookingController {
 	
+	@LoadBalanced
+	@Bean
+	public RestTemplate restTemplate(RestTemplateBuilder builder) {
+		return builder.build();
+	}
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@Autowired
+	BookingService bookingService;
+	
 	@RequestMapping(method = RequestMethod.GET,value = "/booking/newbooking")
 	public String newBooking() {
-		return "sample booking done";
+		String status = "booking-initiated";
+		
+		// calling treasury service to check for funds
+		ResponseEntity<String> fundingStatus = restTemplate.getForEntity("http://localhost:9352/treasury/checkfunds",String.class);
+		status = status + "-" +fundingStatus.getBody().toString();
+		
+		if("Funded".equalsIgnoreCase(fundingStatus.getBody().toString())) {	
+			// route this request to deal documentation service 
+			ResponseEntity<String> dosServiceStatus = restTemplate.getForEntity("http://localhost:9354/documentservice/upload",String.class);
+			status = status + "-" + dosServiceStatus.getBody().toString();
+		}
+		
+		return status;
 		
 	}
 	

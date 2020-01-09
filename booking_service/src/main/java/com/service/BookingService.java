@@ -5,9 +5,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookingService {
 	
-	public String initiateBooking() {	
-		
-		return null;
+	public String initiateBooking() {
+		return "sample initiate Booking done";
 		
 	}
 
