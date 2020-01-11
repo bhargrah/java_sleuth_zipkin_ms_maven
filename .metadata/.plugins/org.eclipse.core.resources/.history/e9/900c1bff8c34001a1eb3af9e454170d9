@@ -45,7 +45,12 @@ public class BookingController {
 		
 	}
 	
-	//Simulating Exception 
+	@RequestMapping(method = RequestMethod.GET, value = "/booking/displaybooking")
+	public String displayBooking() {
+		return "Booking done for ID-576";
+
+	}
+	
 	@RequestMapping(method=RequestMethod.GET,value = "/booking/report")
 	public String reportGeneration() {
 		
@@ -55,6 +60,7 @@ public class BookingController {
 		
 		ResponseEntity<String> documentserviceReportStatus = restTemplate.getForEntity("http://localhost:9354/documentservice/report",String.class);
 		exceptionStatus = exceptionStatus + documentserviceReportStatus.toString();
+		
 		
 		return exceptionStatus;
 	}

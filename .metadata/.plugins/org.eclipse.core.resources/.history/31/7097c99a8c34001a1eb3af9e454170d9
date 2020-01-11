@@ -12,5 +12,6 @@ public class DocumentUploadService {
 	
 	public String getReportStatus() {
 		throw new RuntimeException("Database Contention");
+		
 	}
 }

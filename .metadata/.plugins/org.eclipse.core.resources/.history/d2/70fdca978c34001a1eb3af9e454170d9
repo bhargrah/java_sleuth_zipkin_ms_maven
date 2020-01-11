@@ -10,7 +10,8 @@ public class DocumentUploadService {
 		catch (InterruptedException e) {e.printStackTrace();}
 	}
 	
-	public String getReportStatus() {
-		throw new RuntimeException("Database Contention");
+	public void getReportStatus() {
+		try { Thread.sleep(4000);} 
+		catch (InterruptedException e) {e.printStackTrace();}
 	}
 }

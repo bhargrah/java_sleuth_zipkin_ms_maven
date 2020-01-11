@@ -33,10 +33,5 @@ public class TreasuryApprovalConrtroller {
 		
 		return status;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET,value = "/booking/report")
-	public String reportGeneration() {	
-		return "ok";
-	}
 
 }
