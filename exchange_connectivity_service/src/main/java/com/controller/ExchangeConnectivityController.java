@@ -1,22 +1,22 @@
 package com.controller;
 
-import java.util.Random;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.service.ExchangeConnectivityService;
+
 @RestController
 public class ExchangeConnectivityController {
 
-	public static Random random = new Random(10);
 	
+	@Autowired
+	ExchangeConnectivityService exchangeConnectivityService;
 	
 	@RequestMapping(method = RequestMethod.GET,value = "/exchange/execute")
-	public String executeOnExchange() {
-		try { Thread.sleep(random.nextInt()*0000);
-		} catch (InterruptedException e) { e.printStackTrace();}
-		return "executed_on_exchange";
+	public String execute() {
+		return exchangeConnectivityService.executeOnExchange();
 	}
 	
 }

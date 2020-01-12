@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.service.TreasuryApprovalService;
+
 @RestController
 public class TreasuryApprovalConrtroller {
 	
@@ -22,23 +24,37 @@ public class TreasuryApprovalConrtroller {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@RequestMapping(method=RequestMethod.GET,value = "/treasury/checkfunds")
+	@Autowired
+	TreasuryApprovalService treasuryApprovalService;
+	
+	@RequestMapping(method=RequestMethod.GET,value = "/treasury/checkfundstatus")
 	public String checkFundsStatus() {
 		
-		String status= "funded";
-		// call code for exchange connectivity
+		String status= treasuryApprovalService.fundInternally();
+		
+		ResponseEntity<String> exchangeStatus = restTemplate.getForEntity("http://localhost:9353/exchange/execute",String.class);
+		status = status + "-" + exchangeStatus.getBody().toString();
+				
+		return status;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET,value = "/treasury/report")
+	public String reportGeneration() {	
+		return "treasury_report";
+	}
+	
+	@RequestMapping(method=RequestMethod.GET,value = "/treasury/checkexternalfunds")
+	public String checkExternalFunds() {
+		
+		String status= treasuryApprovalService.fundExternally();
 		
 		ResponseEntity<String> exchangeStatus = restTemplate.getForEntity("http://localhost:9353/exchange/execute",String.class);
 		status = status + "-" + exchangeStatus.getBody().toString();
 		
-		restTemplate.getForEntity("http://localhost:9355/thirdparty/process",String.class);
+		ResponseEntity<String> thirdpartyStatus = restTemplate.getForEntity("http://localhost:9355/thirdparty/process",String.class);
+		status = status + "-" + thirdpartyStatus.getBody().toString();
 		
 		return status;
-	}
-	
-	@RequestMapping(method=RequestMethod.GET,value = "/booking/report")
-	public String reportGeneration() {	
-		return "ok";
 	}
 
 }

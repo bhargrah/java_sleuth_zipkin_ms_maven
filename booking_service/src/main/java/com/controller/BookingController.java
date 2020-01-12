@@ -27,40 +27,59 @@ public class BookingController {
 	@Autowired
 	BookingService bookingService;
 	
-	@RequestMapping(method = RequestMethod.GET,value = "/booking/newbooking")
-	public String newBooking() {
+	/**
+	 * This method will initiate internal booking using no external API
+	 */
+	@RequestMapping(method = RequestMethod.GET,value = "/booking/initiatebooking")
+	public String initiateBooking() {
 		String status = "booking-initiated";
 		
 		// calling treasury service to check for funds
-		ResponseEntity<String> fundingStatus = restTemplate.getForEntity("http://localhost:9352/treasury/checkfunds",String.class);
+		ResponseEntity<String> fundingStatus = restTemplate.getForEntity("http://localhost:9352/treasury/checkfundstatus",String.class);
 		status = status + "-" +fundingStatus.getBody().toString();
 		
-		if((fundingStatus.getBody().toString()).startsWith("funded")) {	
+		if((fundingStatus.getBody().toString()).startsWith("internal_funded")) {	
 			// route this request to deal documentation service 
 			ResponseEntity<String> dosServiceStatus = restTemplate.getForEntity("http://localhost:9354/documentservice/upload",String.class);
 			status = status + "-" + dosServiceStatus.getBody().toString();
 		}
 		
-		//no sleuth
-		restTemplate.getForEntity("http://localhost:9355/thirdparty/process",String.class);
-		restTemplate.getForEntity("http://localhost:9355/thirdparty/process",String.class);
-		restTemplate.getForEntity("http://localhost:9355/thirdparty/process",String.class);
-		
 		return status;
 		
 	}
 	
-	//Simulating Exception 
-	@RequestMapping(method=RequestMethod.GET,value = "/booking/report")
+	/**
+	 * This method when called will simulate exception TIMEOUT scenario
+	 */
+	@RequestMapping(method=RequestMethod.GET,value = "/booking/reportgeneration")
 	public String reportGeneration() {
 		
 		String exceptionStatus = "";
 		ResponseEntity<String> treasuryReportStatus = restTemplate.getForEntity("http://localhost:9352/treasury/report",String.class);
 		exceptionStatus = exceptionStatus + treasuryReportStatus.toString();
 		
-		ResponseEntity<String> documentserviceReportStatus = restTemplate.getForEntity("http://localhost:9354/documentservice/report",String.class);
+		ResponseEntity<String> documentserviceReportStatus = restTemplate.getForEntity("http://localhost:9354/documentservice/reportgeneration",String.class);
 		exceptionStatus = exceptionStatus + documentserviceReportStatus.toString();
 		
+		return exceptionStatus;
+	}
+	
+
+	/**
+	 * This method will simulate booking via third party API
+	 */
+	@RequestMapping(method=RequestMethod.GET,value = "/booking/delegatebooking")
+	public String delegateBooking() {
+		
+		String exceptionStatus = "";
+		ResponseEntity<String> treasuryReportStatus = restTemplate.getForEntity("http://localhost:9352/treasury/checkexternalfunds",String.class);
+		exceptionStatus = exceptionStatus + treasuryReportStatus.toString();
+		
+		ResponseEntity<String> documentserviceReportStatus = restTemplate.getForEntity("http://localhost:9354/documentservice/upload",String.class);
+		exceptionStatus = exceptionStatus + documentserviceReportStatus.toString();
+		
+		//no sleuth
+		restTemplate.getForEntity("http://localhost:9355/thirdparty/status",String.class);
 		return exceptionStatus;
 	}
 

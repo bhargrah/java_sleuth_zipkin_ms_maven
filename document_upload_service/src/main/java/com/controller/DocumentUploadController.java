@@ -19,9 +19,9 @@ public class DocumentUploadController {
 		return "document_uploaded";
 	}
 	
-	@RequestMapping(method=RequestMethod.GET,value="/documentservice/report")
+	@RequestMapping(method=RequestMethod.GET,value="/documentservice/reportgeneration")
 	public String reportGeneration() {
-		documentUploadService.getReportStatus();
+		documentUploadService.getReportStatusFromDB();
 		return "repeort_generated";
 	}
 
