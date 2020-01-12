@@ -1,6 +1,7 @@
 package com.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,14 @@ public class TreasuryApprovalConrtroller {
 	
 	@Autowired
 	TreasuryApprovalService treasuryApprovalService;
+	
+	@Value("${spring.application.name}")
+	String applicationName;
+	
+	@RequestMapping("/")
+    public String index() {
+        return applicationName;
+    }
 	
 	@RequestMapping(method=RequestMethod.GET,value = "/treasury/checkfundstatus")
 	public String checkFundsStatus() {
