@@ -32,7 +32,19 @@ spring.sleuth.sampler.probability=1.0
 
 spring.zipkin.base-url=http://localhost:9092/
 ```
-
+#### zipkin server (pom.xml)
+``` xml
+<dependency>
+    <groupId>io.zipkin.java</groupId>
+    <artifactId>zipkin-server</artifactId>
+    <version>2.8.0</version>
+</dependency>
+<dependency>
+    <groupId>io.zipkin.java</groupId>
+    <artifactId>zipkin-autoconfigure-ui</artifactId>
+    <version>2.8.0</version>
+</dependency>
+```
 ## Zipkin Stats
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/spans_flow.png)
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/trace_flow.png)
