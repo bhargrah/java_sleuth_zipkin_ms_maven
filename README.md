@@ -1,8 +1,5 @@
 # Managing latency in microservices with Sleuth Zipkin 
 
-## Depedencies among microservices 
-![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/Interaction.png)
-
 ## Microservices Function
 | Name  | URL | IsSleuth Enabled |
 | ------------- | ------------- | ------------- |
@@ -10,9 +7,11 @@
 | Treasury Service  | http://localhost:9352/treasury/checkfunds  | Y |
 | Exchange Service  | http://localhost:9353/exchange/execute  | Y |
 | Document Service  | http://localhost:9354/documentservice/upload  | Y |
-| Third Party Service  | http://localhost:9354/documentservice/upload  | Y |
+| Third Party Service  | http://localhost:9355/thirdparty/process  | Y |
 | Zipkin Service | http://localhost:9092/ | NA |
 
+## Depedencies among microservices 
+![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/Interaction.png)
 
 ## Sleuth Integration 
 
