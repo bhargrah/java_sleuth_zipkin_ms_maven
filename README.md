@@ -7,7 +7,7 @@
 | Treasury Service  | http://localhost:9352/treasury/checkfunds  | Y |
 | Exchange Service  | http://localhost:9353/exchange/execute  | Y |
 | Document Service  | http://localhost:9354/documentservice/upload  | Y |
-| Third Party Service  | http://localhost:9355/thirdparty/process  | Y |
+| Third Party Service  | http://localhost:9355/thirdparty/process  | N |
 | Zipkin Service | http://localhost:9092/ | NA |
 
 ## Depedencies among microservices 
