@@ -19,10 +19,15 @@
 
 #### Scenario-1 : Plain vanilla when all service works
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/vanilla.png)
+![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/vanilla_zipkin.png)
 #### Scenario-2 : Exception occured in one service 
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/exeption.png)
+![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/exception_zipkin.png)
+
 #### Scenario-3 : No sleuth integration in few services
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/third.png)
+![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/third_zipkin.png)
+
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/spans_flow.png)
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/trace_flow.png)
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/booking_flow.png)
