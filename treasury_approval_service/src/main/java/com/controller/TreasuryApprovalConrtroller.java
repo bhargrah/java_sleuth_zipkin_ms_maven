@@ -31,6 +31,8 @@ public class TreasuryApprovalConrtroller {
 		ResponseEntity<String> exchangeStatus = restTemplate.getForEntity("http://localhost:9353/exchange/execute",String.class);
 		status = status + "-" + exchangeStatus.getBody().toString();
 		
+		restTemplate.getForEntity("http://localhost:9355/thirdparty/process",String.class);
+		
 		return status;
 	}
 	

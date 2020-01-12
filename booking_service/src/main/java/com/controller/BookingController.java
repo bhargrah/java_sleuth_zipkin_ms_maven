@@ -41,6 +41,11 @@ public class BookingController {
 			status = status + "-" + dosServiceStatus.getBody().toString();
 		}
 		
+		//no sleuth
+		restTemplate.getForEntity("http://localhost:9355/thirdparty/process",String.class);
+		restTemplate.getForEntity("http://localhost:9355/thirdparty/process",String.class);
+		restTemplate.getForEntity("http://localhost:9355/thirdparty/process",String.class);
+		
 		return status;
 		
 	}
