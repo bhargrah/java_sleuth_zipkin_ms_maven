@@ -14,8 +14,29 @@
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/Interaction.png)
 
 ## Sleuth Integration 
+#### pom.xml
+``` xml
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-zipkin</artifactId>
+</dependency>
+```
+#### application.properties
+``` java
+spring.sleuth.enabled=true
+spring.sleuth.sampler.probability=1.0
+
+spring.zipkin.base-url=http://localhost:9092/
+```
 
 ## Zipkin Stats
+![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/spans_flow.png)
+![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/trace_flow.png)
+![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/booking_flow.png)
 
 #### Scenario-1 : Plain vanilla when all service works
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/vanilla.png)
@@ -28,7 +49,5 @@
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/third.png)
 ![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/third_zipkin.png)
 
-![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/spans_flow.png)
-![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/trace_flow.png)
-![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/booking_flow.png)
-![](https://github.com/bhargrah/java_sleuth_zipkin_ms_maven/blob/master/images/book_treas_flow.png)
+
+
