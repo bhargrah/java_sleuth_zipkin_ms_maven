@@ -91,5 +91,25 @@ public class BookingController {
 		restTemplate.getForEntity("http://localhost:9355/thirdparty/status",String.class);
 		return exceptionStatus;
 	}
+	
+	/**
+	 * This method will simulate custome span implementation 
+	 */
+	@RequestMapping(method=RequestMethod.GET,value = "/booking/custombooking")
+	public String customBooking() {
+		
+		String exceptionStatus = "custom_span";
+		
+		String dbResult = bookingService.lookupBookingFromDB();
+		exceptionStatus = exceptionStatus + dbResult.toString();
+		
+		ResponseEntity<String> treasuryReportStatus = restTemplate.getForEntity("http://localhost:9352/treasury/checkfundstatus",String.class);
+		exceptionStatus = exceptionStatus + treasuryReportStatus.toString();
+		
+		ResponseEntity<String> documentserviceReportStatus = restTemplate.getForEntity("http://localhost:9354/documentservice/upload",String.class);
+		exceptionStatus = exceptionStatus + documentserviceReportStatus.toString();
+		
+		return exceptionStatus;
+	}
 
 }
